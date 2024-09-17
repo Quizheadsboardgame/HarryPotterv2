@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #0CC0DF; /* Background color */
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 40%;
+            max-width: 800px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow */
+            padding: 20px;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 5px solid #0CC0DF; /* Outer blue border color */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .qa-box {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .question {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .answer {
+            font-size: 1.2em;
+            color: #555;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Text shadow */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img id="quizImage" src="https://i.imgur.com/J3OIvZt.png" alt="Quiz Image">
+        <div class="qa-box">
+            <div id="question" class="question">Click the image to get a question!</div>
+            <div id="answer" class="answer"></div>
+        </div>
+    </div>
+    
+    <script>
+        const questionsAndAnswers = [
+            { question: "What is the name of Harry Potter's owl?", answer: "Hedwig" },
+            { question: "Which house is Harry Potter sorted into at Hogwarts?", answer: "Gryffindor" },
+            { question: "Who is Harry Potter's best friend?", answer: "Ron Weasley" },
+            { question: "What position does Harry play on the Quidditch team?", answer: "Seeker" },
+            { question: "What is the name of Harry Potter's godfather?", answer: "Sirius Black" },
+            { question: "Who is the headmaster of Hogwarts during Harry's time there?", answer: "Albus Dumbledore" },
+            { question: "What is the name of the dark wizard who killed Harry's parents?", answer: "Lord Voldemort" },
+            { question: "What spell is used to disarm an opponent?", answer: "Expelliarmus" },
+            { question: "Who teaches Potions at Hogwarts during Harry's first year?", answer: "Severus Snape" },
+            { question: "What is the name of the Weasleys' house?", answer: "The Burrow" },
+            { question: "What magical object shows the deepest desire of one's heart?", answer: "The Mirror of Erised" },
+            { question: "What is the name of the creature that guards the entrance to Gryffindor Tower?", answer: "The Fat Lady" },
+            { question: "What is the name of the three-headed dog that guards the trapdoor to the Philosopher's Stone?", answer: "Fluffy" },
+            { question: "What is Hermione Granger's patronus?", answer: "Otter" },
+            { question: "What is the name of the book that contains information on dark magic and cursed objects?", answer: "The Dark Arts" },
+            { question: "What spell is used to produce a Patronus?", answer: "Expecto Patronum" },
+            { question: "What magical plant helps with sleep and relaxation?", answer: "Valerian Root" },
+            { question: "What is the name of the magical bank run by goblins?", answer: "Gringotts" },
+            { question: "What is the name of the shop where Harry buys his wand?", answer: "Ollivanders" },
+            { question: "What is the name of the Weasleys' pet owl?", answer: "Errol" },
+            { question: "Who is the Keeper of Keys and Grounds at Hogwarts?", answer: "Rubeus Hagrid" },
+            { question: "What is the name of the potion used to heal injuries?", answer: "Skele-Gro" },
+            { question: "What is the name of the spell that can summon objects?", answer: "Accio" },
+            { question: "What magical creature is known for its ability to change its appearance?", answer: "Polyjuice Potion" },
+            { question: "What is the name of the magical creature that produces a powerful stink when threatened?", answer: "Basilisk" },
+            { question: "Who is the Defense Against the Dark Arts teacher in Harry's fourth year?", answer: "Mad-Eye Moody" },
+            { question: "What is the name of the magical object that can time travel?", answer: "The Time-Turner" },
+            { question: "Who becomes the head of the Ministry of Magic in the final book?", answer: "Kingsley Shacklebolt" },
+            { question: "What is the name of the spell used to create a protective shield?", answer: "Protego" },
+            { question: "What is the name of the magical object that can make a person invisible?", answer: "Invisibility Cloak" },
+            { question: "Who is the founder of the house of Gryffindor?", answer: "Godric Gryffindor" },
+            { question: "What is the name of the wizarding school in France?", answer: "Beauxbatons Academy of Magic" },
+            { question: "What is the name of the magical creature that can only be seen by those who have experienced death?", answer: "Thestral" },
+            { question: "What is the name of Harry's aunt who raised him?", answer: "Petunia Dursley" },
+            { question: "What is the name of the spell used to levitate objects?", answer: "Wingardium Leviosa" },
+            { question: "What is the name of the spell used to unlock doors?", answer: "Alohomora" },
+            { question: "What is the name of the magical item that can store memories?", answer: "Pensieve" },
+            { question: "What is the name of the spell that causes a person to float in mid-air?", answer: "Leviosa" },
+            { question: "What magical plant has the ability to heal serious injuries?", answer: "Mandrake" },
+            { question: "What is the name of the magical shop in Diagon Alley that sells magical creatures?", answer: "Magical Menagerie" },
+            { question: "What is the name of the magical stone that grants immortality?", answer: "The Philosopher's Stone" },
+            { question: "Who is the head of Slytherin House?", answer: "Salazar Slytherin" },
+            { question: "What is the name of the magical spell that can make things explode?", answer: "Bombarda" },
+            { question: "Who is the editor of the Daily Prophet?", answer: "Rita Skeeter" },
+            { question: "What is the name of the charm that creates a light at the tip of a wand?", answer: "Lumos" },
+            { question: "What is the name of the magical spell that repairs broken objects?", answer: "Reparo" },
+            { question: "What magical object is used to store and access a wizard's personal memories?", answer: "Pensieve" },
+            { question: "Who is the head of Ravenclaw House?", answer: "Rowena Ravenclaw" },
+            { question: "What is the name of the magical spell that makes objects disappear?", answer: "Evanesco" },
+            { question: "What is the name of the charm used to create a bright light?", answer: "Lumos" },
+            { question: "What is the name of the charm that allows witches and wizards to communicate over long distances?", answer: "Floo Powder" },
+            { question: "Who is the head of Hufflepuff House?", answer: "Helga Hufflepuff" },
+            { question: "What magical creature is known for guarding treasures?", answer: "Dragon" },
+            { question: "What is the name of the spell that can heal minor injuries?", answer: "Episkey" },
+            { question: "What is the name of the potion that grants temporary invincibility?", answer: "Felix Felicis" },
+            { question: "Who is the ghost of Gryffindor House?", answer: "Sir Nicholas de Mimsy-Porpington" },
+            { question: "What is the name of the magical object that can reveal hidden messages?", answer: "The Marauder's Map" },
+            { question: "Who is the ghost of Slytherin House?", answer: "The Bloody Baron" },
+            { question: "What is the name of the magical object that allows time travel?", answer: "Time-Turner" },
+            { question: "What spell is used to summon a Patronus?", answer: "Expecto Patronum" },
+            { question: "Who is the ghost of Ravenclaw House?", answer: "The Grey Lady" },
+            { question: "What is the name of the magical object that can see into the future?", answer: "Divination Crystal Ball" },
+            { question: "What is the name of the spell that can create light?", answer: "Lumos" },
+            { question: "What magical creature is known for its ability to transform into different shapes?", answer: "Animagus" },
+            { question: "What is the name of the spell that can summon objects from a distance?", answer: "Accio" },
+            { question: "What is the name of the spell that can repel dark magic?", answer: "Protego" },
+            { question: "Who is the ghost of Hufflepuff House?", answer: "The Fat Friar" },
+            { question: "What is the name of the spell that can reveal hidden objects?", answer: "Homenum Revelio" },
+            { question: "What magical creature is known for its ability to charm and mesmerize?", answer: "Basilisk" },
+            { question: "What is the name of the magical object that can turn back time?", answer: "Time-Turner" },
+            { question: "Who is the ghost of the Chamber of Secrets?", answer: "Tom Riddle" },
+            { question: "What is the name of the spell that can fix broken objects?", answer: "Reparo" },
+            { question: "What is the name of the spell that can make objects disappear?", answer: "Evanesco" },
+            { question: "What magical creature is known for its ability to produce a powerful stink?", answer: "Skrewt" },
+            { question: "What is the name of the spell that can repair broken objects?", answer: "Reparo" },
+            { question: "What is the name of the magical object that can show the deepest desires of one's heart?", answer: "The Mirror of Erised" },
+            { question: "What spell is used to summon a Patronus?", answer: "Expecto Patronum" },
+            { question: "What is the name of the magical creature that guards the entrance to the Chamber of Secrets?", answer: "Basilisk" },
+            { question: "Who is the head of Gryffindor House?", answer: "Minerva McGonagall" },
+            { question: "What is the name of the magical object that can reveal hidden information?", answer: "The Marauder's Map" },
+            { question: "What spell is used to make objects float?", answer: "Wingardium Leviosa" },
+            { question: "What is the name of the magical potion that makes the drinker temporarily invisible?", answer: "Invisibility Potion" },
+            { question: "What is the name of the magical object that can reveal hidden messages?", answer: "The Marauder's Map" },
+            { question: "Who is the head of Slytherin House?", answer: "Salazar Slytherin" },
+            { question: "What is the name of the spell used to create light at the tip of the wand?", answer: "Lumos" },
+            { question: "What is the name of the magical object that can detect untrustworthy individuals?", answer: "The Sorting Hat" },
+            { question: "What magical creature can only be seen by those who have experienced death?", answer: "Thestral" },
+            { question: "What is the name of the magical spell that can summon objects from a distance?", answer: "Accio" },
+            { question: "What is the name of the magical object that allows one to see into the future?", answer: "Divination Crystal Ball" }
+        ];
+
+        const img = document.getElementById('quizImage');
+        const questionElement = document.getElementById('question');
+        const answerElement = document.getElementById('answer');
+
+        function getRandomQuestion() {
+            const randomIndex = Math.floor(Math.random() * questionsAndAnswers.length);
+            return questionsAndAnswers[randomIndex];
+        }
+
+        img.addEventListener('click', () => {
+            const { question, answer } = getRandomQuestion();
+            questionElement.textContent = question;
+            answerElement.textContent = answer;
+        });
+    </script>
+</body>
+</html>
