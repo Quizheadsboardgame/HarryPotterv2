@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HARRY POTTER</title>
+    <title>HARRY POTTER: PART ONE</title>
     <style>
         * {
             margin: 0;
@@ -12,18 +12,18 @@
         }
 
         body {
-            font-family: Arial, sans-serif; /* Standard font */
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: transparent; /* Fully transparent background */
-            color: black; /* Standard text color */
+            background-color: transparent;
+            color: black;
             text-align: center;
         }
 
         #quiz-container {
-            background-color: transparent; /* Fully transparent container */
+            background-color: transparent;
             padding: 20px;
             max-width: 600px;
             width: 100%;
@@ -47,13 +47,13 @@
         .answer {
             font-size: 1.2rem;
             margin-bottom: 30px;
-            color: white; /* Change the answer color to white */
+            color: white;
         }
 
         #next-button {
-            background-color: white; /* Change background color to white */
-            color: black; /* Change text color to black for visibility */
-            border: 2px solid #ff9900; /* Optional: Add a border for better visibility */
+            background-color: white;
+            color: black;
+            border: 2px solid #ff9900;
             padding: 15px;
             margin-top: 20px;
             border-radius: 10px;
@@ -63,7 +63,7 @@
         }
 
         #next-button:hover {
-            background-color: #ffcc00; /* Change hover color for better effect */
+            background-color: #ffcc00;
         }
 
         @keyframes fadeOut {
@@ -97,7 +97,7 @@
 
 <div id="quiz-container">
     <img id="logo" src="https://i.imgur.com/cyZ0Z21.png" alt="George Michael Logo">
-    <h1>HARRY POTTER</h1>
+    <h1>HARRY POTTER: PART ONE</h1>
     <div id="question-container">
         <div class="question" id="question">Loading question...</div>
         <div class="answer" id="answer">Loading answer...</div>
@@ -106,14 +106,12 @@
 </div>
 
 <script>
-    // Question and answers data
     const quizData = [
-        { question: "Who is the author of the Harry Potter series?", answer: "J.K. Rowling." },
+ { question: "Who is the author of the Harry Potter series?", answer: "J.K. Rowling." },
         { question: "What is the name of Harry Potter's pet owl?", answer: "Hedwig." },
         { question: "Which house at Hogwarts does Harry Potter belong to?", answer: "Gryffindor." },
-        { question: "What is the name of the school that Harry attends?", answer: "Hogwarts School of Witchcraft and Wizardry." },
+        { question: "What is the full name of the school that Harry attends?", answer: "Hogwarts School of Witchcraft and Wizardry." },
         { question: "Who is the headmaster of Hogwarts during most of the series?", answer: "Albus Dumbledore." },
-        { question: "What is the name of Harry's best friend?", answer: "Hermione Granger." },
         { question: "What is the name of the dark wizard that Harry must defeat?", answer: "Lord Voldemort." },
         { question: "Which spell is used to disarm an opponent?", answer: "Expelliarmus." },
         { question: "What is the name of the potion that grants good luck?", answer: "Felix Felicis (also known as Liquid Luck)." },
@@ -157,10 +155,7 @@
         { question: "What is the name of the final book in the Harry Potter series?", answer: "Harry Potter and the Deathly Hallows." },
         { question: "What are the names of Harry's parents?", answer: "James and Lily Potter." },
         { question: "What is the name of the house elf that serves the Malfoy family?", answer: "Dobby." },
-        { question: "What is the main ingredient in the Polyjuice Potion?", answer: "A piece of the person to be transformed into." },
-        { question: "Which character says, 'After all this time?' and what is the response?", answer: "Snape asks, 'Always.'" },
         { question: "What does 'Muggle' refer to?", answer: "A non-magical person." },
-        { question: "What is the name of the battle that takes place at Hogwarts in the final book?", answer: "The Battle of Hogwarts." },
         { question: "What does the spell 'Stupefy' do?", answer: "Stuns the target." },
         { question: "What are the names of the four founders of Hogwarts?", answer: "Godric Gryffindor, Helga Hufflepuff, Rowena Ravenclaw, Salazar Slytherin." },
         { question: "Who is the Keeper of the Forbidden Forest?", answer: "Hagrid." },
@@ -175,39 +170,18 @@
         { question: "What is the name of the Weasley sister who becomes a professional Quidditch player?", answer: "Ginny Weasley." },
         { question: "What is the name of the secret society that fights against Voldemort?", answer: "The Order of the Phoenix." },
         { question: "Which spell creates a Patronus?", answer: "Expecto Patronum." },
-        { question: "What is the name of the wizarding prison?", answer: "Azkaban." },
-        { question: "Who was the first Defense Against the Dark Arts teacher in Harry's first year?", answer: "Quirinus Quirrell." },
-        { question: "Which spell is used to levitate objects?", answer: "Wingardium Leviosa." },
-        { question: "What is the name of Hermione's pet cat?", answer: "Crookshanks." },
-        { question: "What does the Sorting Hat do?", answer: "Sorts students into their respective Hogwarts houses." },
-        { question: "Which character is known as 'the Boy Who Lived'?", answer: "Harry Potter." },
-        { question: "What is the name of the book series that is a key plot device in the Harry Potter series?", answer: "The Tales of Beedle the Bard." },
-        { question: "What magical creature serves as a guard to the entrance of the wizarding bank?", answer: "Goblins." },
-        { question: "What is the name of the potion that transforms someone into a werewolf?", answer: "There is no specific potion for this; it's a curse." },
-        { question: "Who is known for saying, 'I solemnly swear that I am up to no good'?", answer: "Harry Potter (referring to the Marauder's Map)." },
-        { question: "What is the name of Harry's aunt and uncle?", answer: "Vernon and Petunia Dursley." },
-        { question: "What is the primary use of the Invisibility Cloak?", answer: "To make the wearer invisible." },
-        { question: "What does the spell 'Riddikulus' do?", answer: "It is used to defeat a Boggart by making it appear funny." },
-        { question: "What are the names of Harry's children?", answer: "James Sirius, Albus Severus, and Lily Luna." },
-        { question: "Who is the author of 'A History of Magic'?", answer: "Bathilda Bagshot." },
-        { question: "What does the spell 'Expecto Patronum' conjure?", answer: "A Patronus." },
-        { question: "Which character has a pet toad named Trevor?", answer: "Neville Longbottom." },
-        { question: "Which character is known for their love of magical creatures and nature?", answer: "Rubeus Hagrid." },
-        { question: "Who ultimately destroys Voldemort?", answer: "Harry Potter, using the Elder Wand." },
-        { question: "What does the term 'No-Maj' refer to?", answer: "Non-magical person (used in 'Fantastic Beasts')." },
-        { question: "Which spell is used to create a protective shield?", answer: "Protego." },
-        { question: "What is the final challenge in the Triwizard Tournament?", answer: "The maze in the final task." },
-        { question: "Who is the ghost of Hufflepuff House?", answer: "The Fat Friar." },
-        { question: "What is the name of the shop where Harry buys his wand?", answer: "Ollivanders." },
-        { question: "Which potion is known to be extremely difficult to brew and can lead to disastrous results if done incorrectly?", answer: "Polyjuice Potion." },
-        { question: "What spell does Harry use to summon his broom during the Quidditch final in 'Harry Potter and the Goblet of Fire'?", answer: "Accio." },
-        { question: "Who killed Dumbledore?", answer: "Severus Snape (on Dumbledore's request)." },
-        { question: "What is the name of the Weasley family’s home?", answer: "The Burrow." }
+        { question: "What is the name of Dumbledore's phoenix?", answer: "Fawkes." },
+        { question: "Who is the head of Hufflepuff House?", answer: "Professor Pomona Sprout." },
+        { question: "What is the name of the plant that Hermione uses to help Harry breathe underwater during the Triwizard Tournament?", answer: "Gillyweed." },
+        { question: "How do Lily and Snape meet for the first time?", answer: "Snape lived in the same town and introduced himself to Lily after he saw her doing magic." },
+        { question: "How many Horcruxes did Voldemort create intentionally?", answer: "Six: Tom Riddle's Diary, Marvolo Gaunt's Ring, Salazar Slytherin's Locket, Helga Hufflepuff's Cup, Rowena Ravenclaw's Diadem, and Nagini the snake." },
+        { question: "What is the primary ingredient in Polyjuice potion?", answer: "The hair of the person you want to transform into." },
+        { question: "What is the correct birth order of the Weasley children?", answer: "Bill, Charlie, Percy, Fred and George, Ron, Ginny." },
+        { question: "What is the name of the magical map that shows the entire layout of Hogwarts?", answer: "The Marauder's Map." },
     ];
 
     let currentQuestionIndex = 0;
 
-    // Shuffle the quiz data
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -215,7 +189,6 @@
         }
     }
 
-    // Start the quiz
     shuffle(quizData);
     showQuestion();
 
@@ -226,7 +199,6 @@
         questionContainer.innerText = quizData[currentQuestionIndex].question;
         answerContainer.innerText = "Loading answer...";
 
-        // Fade in effect
         answerContainer.classList.remove("fadeIn");
         answerContainer.classList.add("fadeOut");
 
@@ -246,7 +218,7 @@
             const answerContainer = document.getElementById("answer");
             questionContainer.innerText = "Thank you for playing!";
             answerContainer.innerText = "";
-            document.getElementById("next-button").style.display = "none"; // Hide the next button
+            document.getElementById("next-button").style.display = "none";
         }
     }
 </script>
